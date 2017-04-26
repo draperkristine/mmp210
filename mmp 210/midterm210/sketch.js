@@ -1,4 +1,4 @@
-var sourceText = "Darkness and Light";
+var sourceText = "courage is resistance to fear, mastery of fear, not absence of fear";
 
 var words = sourceText.split(" ");
 
