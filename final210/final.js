@@ -1,72 +1,90 @@
+var pacX = 100,
+    pacY = 100;
+var spr1;
+var img;
+var img2;
+var cam = 0;
 var x = 100,
-    y = 100,
-    angle1 = 0.0,
-    segLength = 50;
-var spr;
-var speed = 3;
-var ellipseY = [0, 15, 30, 45, 60, 75];
-function setup(){
-    createCanvas(640, 460);
-    
-    spr = createSprite(width/2, height/3, 40, 40);
-    spr.shapeColor = color(255);
+  y = 100,
+  angle1 = 0.0,
+  segLength = 50;
+speed = 5;
+function preload(){
+    img2 = loadImage("images/pinkyghost.png");
+    pac = loadImage("images/pac-man.jpg");
+    img3 = loadImage("images/pac-man2.png");
 }
 
- function draw(){
-   background('black'); 
-   
-     Stroke('blue');
-     /*rectMode(CENTER);
-     fill('gold');
-     for (var i = 0; i < ellipseY.length; i++){
-         ellipse((i+x)*100, ellipseY[i], 50, 50);
-         ellipseY[i] +=1;
-     }
-     if (i > width){
-         speed = 3;
-     }
-     i = i - speed;*/
-     dx = mouseX - x;
-     dy = mouseY - y;
-     angle1 = atan2(dy, dx);
-     x = mouseX - (cos(angle1) * segLength);
-     y = mouseY - (sin(angle1) * segLength);
-      fill)(r, g, b, 20);
-     stroke(r, g, b);
-     strokeWeight(20);
-     noStroke();
-     ellipse(x, y, 100, 100);
-     x = x + random(-1, 1);
-     y = y / 10
- }
-function keyPressed(){
-    if (keyCode == RIGHT_ARROW) {
-        spr.setSpeed(1.5, 0);
-    }
-    else if (keyCode == DOWN_ARROW){
-        spr.setSpeed(1,5, 90);
-    }
-    else if (keyCode == LEFT_ARROW){
-        spr.setSpeed(1.5, 180);
-    }
-    else if(keyCode == UP_ARROW){
-        spr.Speed(1.5, 270);
-    }
-    else if (key == ''){
-        spr.Speed(0, 0);
-    }
-    return false;
-    var d = dist(mouseX, mouseY, 360, 200)
-    if (d < 100){
-        r = random(255);
-        g = random(255);
-        b = random(255);
-    }
+function setup() {
+    
+  createCanvas(720, 400);
+  strokeWeight(20.0);
+  stroke(255, 100);
+    noStroke();
+    //pinky controls
+    console.log("hello");
+    
+    
+    spr1 = createSprite( width/2, height/2, 100, 100);
+    spr1.shapeColor = color(0);
+ 
 }
-function segment(x, y a) {
-    push();
-    translate(x, y);
-    line(0, 0, segLength, 0);
-    ellipse(0, 0, 10);
-    pop();
+
+
+
+function draw() {
+ // background
+    background(pac);
+   stroke(226, 204, 0);
+  //  line(0, cam, width, cam);
+    
+    cam++;
+    if(cam > height){
+        cam = 0;
+    }
+    image(pac, 720, 400);
+    
+  //pac man 
+  dx = mouseX - pacX;
+  dy = mouseY - pacY;
+  angle1 = atan2(dy, dx);
+  pacX = mouseX - (cos(angle1) * segLength);
+  pacY = mouseY - (sin(angle1) * segLength);
+
+  segment(pacX, pacY, angle1);
+  image(img3, pacX, pacY, 50, 50);
+    
+
+//pinky controls
+
+
+    if(keyIsDown (RIGHT_ARROW)){
+        x = x + speed;
+    }
+    else if(keyIsDown (DOWN_ARROW)){
+        y = y + speed;
+    }
+    else if(keyIsDown (LEFT_ARROW)){
+        x = x - speed;
+    }
+    else if(keyIsDown (UP_ARROW)){
+        y = y - speed;
+    }
+    image(img2, x, y, 50, 50);
+    
+ /* I PUT THIS HERE BECAUSE I DONT WANT PINKY TO GO OFF CANVAS BUT I AM UNSURE HOW TO MAKE IT WORK PROPERLY IT IS ALSO ANOTHER SET OF CONTROLS   
+    // pac-ma controls 2
+    
+    img3.velocity.pacX = (mouseX-img3.position.pacX)*0.2;
+    img3.velocity.pacY = (mouseY-img3.position.pacY)*0.2;
+    img3.collide(img2);
+}
+*/
+//pac-man
+function segment(pacX, pacY, a) {
+  push();
+  translate(pacX, pacY);
+  rotate(a);
+ // line(0, 0, segLength, 0);
+  pop();
 }
