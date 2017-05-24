@@ -77,9 +77,9 @@ function draw() {
     
     img3.velocity.pacX = (mouseX-img3.position.pacX)*0.2;
     img3.velocity.pacY = (mouseY-img3.position.pacY)*0.2;
-    img3.collide(img2);
+    img3.collide(img2);*/
 }
-*/
+
 //pac-man
 function segment(pacX, pacY, a) {
   push();
