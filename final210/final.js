@@ -1,6 +1,6 @@
 var pacX = 100,
     pacY = 100;
-var spr1;
+
 var img;
 var img2;
 var cam = 0;
@@ -71,6 +71,13 @@ function draw() {
         y = y - speed;
     }
     image(img2, x, y, 50, 50);
+    
+    if (img3 == img2){
+        
+        speed = 0;
+        println('GAME OVER');
+    }
+    
     
  /* I PUT THIS HERE BECAUSE I DONT WANT PINKY TO GO OFF CANVAS BUT I AM UNSURE HOW TO MAKE IT WORK PROPERLY IT IS ALSO ANOTHER SET OF CONTROLS   
     // pac-ma controls 2
